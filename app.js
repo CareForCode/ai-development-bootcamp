@@ -1,38 +1,28 @@
-// Grab references to the persistent UI elements
+import { addTodo } from './addTodo.js';
+import { toggleTodo } from './toggleTodo.js';
+import { deleteTodo } from './deleteTodo.js';
+
+// Shared DOM references
 const input = document.getElementById('todo-input');
 const addBtn = document.getElementById('add-btn');
 const list = document.getElementById('todo-list');
 
-// Creates a new TODO item from the current input value and appends it to the list
-function addTodo() {
-  const title = input.value.trim();
-  // Ignore empty or whitespace-only submissions
-  if (!title) return;
-
-  // Build the list item with a checkbox, title text, and delete button
-  const li = document.createElement('li');
-  li.innerHTML = `
-    <input type="checkbox">
-    <span>${title}</span>
-    <button class="delete-btn">✕</button>
-  `;
-
-  // Toggle the 'completed' CSS class when the checkbox is checked or unchecked
-  li.querySelector('input[type="checkbox"]').addEventListener('change', e => {
-    li.classList.toggle('completed', e.target.checked);
-  });
-
-  // Remove the item from the DOM when the delete button is clicked
-  li.querySelector('.delete-btn').addEventListener('click', () => {
-    li.remove();
-  });
-
-  list.appendChild(li);
-  input.value = ''; // Clear the input field after adding
-}
-
 // Allow adding a todo via the Add button or the Enter key
-addBtn.addEventListener('click', addTodo);
+addBtn.addEventListener('click', () => addTodo(input, list));
+
 input.addEventListener('keydown', e => {
-  if (e.key === 'Enter') addTodo();
+  if (e.key === 'Enter') addTodo(input, list);
+});
+
+// Event delegation: handle toggle and delete for all list items from the parent
+list.addEventListener('change', e => {
+  if (e.target.matches('input[type="checkbox"]')) {
+    toggleTodo(e.target.closest('li'), e.target.checked);
+  }
+});
+
+list.addEventListener('click', e => {
+  if (e.target.matches('.delete-btn')) {
+    deleteTodo(e.target.closest('li'));
+  }
 });
