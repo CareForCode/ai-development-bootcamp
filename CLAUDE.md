@@ -70,6 +70,8 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 **What this is:** A single-page, in-browser TODO app. See `PRD.md` for full spec.
 
+**Architecture:** See `ARCHITECTURE.md` for file structure, responsibilities, function signatures, and data flow.
+
 **Tech constraints:** Plain HTML/CSS/JS only — no frameworks, no build tools, no external dependencies.
 
 **Hard scope boundaries (non-goals):** No user auth, no backend, no cloud sync, no persistence, no native apps, no due dates/priorities/tags.
