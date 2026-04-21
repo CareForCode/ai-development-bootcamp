@@ -1,0 +1,20 @@
+{
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": false,
+    "failIfUnavailable": true,
+    "allowUnsandboxedCommands": false,
+    "permissions.disableBypassPermissionsMode": "disable",
+
+    "filesystem": {
+      "denyRead": ["~/"],
+      "allowRead": ["."],
+      "denyWrite": ["//**/.env", "//**/.env.*"]
+    },
+
+    "network": {
+      "allowManagedDomainsOnly": true,
+      "allowedDomains": ["github.com"]
+    }
+  }
+}
