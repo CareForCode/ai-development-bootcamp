@@ -1,8 +1,14 @@
 {
   "permissions": {
     "deny": [
-      "Read(../dschtest/)",
-      "Write(//**/.env)"
+      "Write(//**/.env)",
+
+      "Read(//**/)", // TODO: check if can still edit in project
+      "Edit(//**/)",
+      "Write(//**/)",
+
+      "Edit(./.claude/settings.json)",
+      "Write(./.claude/settings.json)"
     ]
   },
   "sandbox": {
@@ -10,12 +16,11 @@
     "autoAllowBashIfSandboxed": false,
     "failIfUnavailable": true,
     "allowUnsandboxedCommands": false,
-    "permissions.disableBypassPermissionsMode": "disable",
 
     "filesystem": {
-      "denyRead": ["~/", "../dschtest/"],
+      "denyRead": ["~/"],
       "allowRead": ["."],
-      "denyWrite": ["//**/.env", "//**/.env.*",".claude/settings.json"]
+      "denyWrite": ["//**/.env", "//**/.env.*", ".claude/settings.json"]
     },
 
     "network": {
