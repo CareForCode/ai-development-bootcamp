@@ -1,4 +1,10 @@
 {
+  "permissions": {
+    "deny": [
+      "Read(../dschtest/)",
+      "Write(//**/.env)"
+    ]
+  },
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
@@ -7,9 +13,9 @@
     "permissions.disableBypassPermissionsMode": "disable",
 
     "filesystem": {
-      "denyRead": ["~/"],
+      "denyRead": ["~/", "../dschtest/"],
       "allowRead": ["."],
-      "denyWrite": ["//**/.env", "//**/.env.*"]
+      "denyWrite": ["//**/.env", "//**/.env.*",".claude/settings.json"]
     },
 
     "network": {
