@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  min-height: 100vh;
+  padding: 60px 16px;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  letter-spacing: -0.5px;
+}
+
+.input-row {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border: 2px solid #e0e0e8;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.input-row:focus-within {
+  border-color: #5b7fe0;
+}
+
+#todo-input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: none;
+  outline: none;
+  color: #333;
+  background: white;
+}
+
+#todo-input::placeholder {
+  color: #bbb;
+}
+
+#add-btn {
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 500;
+  background: #5b7fe0;
+  color: white;
+  border: none;
+  border-left: 2px solid #e0e0e8;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+
+#add-btn:hover {
+  background: #4a6ecc;
+}
+
+#add-btn:active {
+  transform: scale(0.97);
+}
+
+#todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#todo-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8f8fc;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #efefef;
+  transition: box-shadow 0.2s;
+}
+
+#todo-list li:hover {
+  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.12);
+}
+
+#todo-list li input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #5b7fe0;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+#todo-list li span {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+#todo-list li.completed span {
+  text-decoration: line-through;
+  color: #bbb;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #ccc;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  color: #e74c3c;
+  background: #fdf0ef;
+}
+
+#empty-state {
+  text-align: center;
+  color: #bbb;
+  margin-top: 16px;
+  font-size: 0.9rem;
+}
+
+.hidden {
+  display: none;
+}
