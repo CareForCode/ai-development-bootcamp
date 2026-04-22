@@ -3,14 +3,16 @@
     "deny": [
       "Write(//**/.env)",
 
-      "Read(//**/)", // TODO: check if can still edit in project
+      "Read(//**/)",
       "Edit(//**/)",
       "Write(//**/)",
 
       "Edit(./.claude/settings.json)",
       "Write(./.claude/settings.json)"
     ]
-  },
+  }, "allow": [
+    "Read(./.**)"
+  ],
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
