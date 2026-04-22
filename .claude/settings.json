@@ -22,5 +22,9 @@
       "allowManagedDomainsOnly": true,
       "allowedDomains": ["github.com"]
     }
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "/.claude/statusline.sh"
   }
 }

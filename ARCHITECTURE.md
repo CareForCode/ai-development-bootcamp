@@ -14,9 +14,14 @@ Single-page, in-browser TODO application. No build tools, no frameworks, no exte
 
 ```
 /
-├── index.html      # Page structure and DOM skeleton
-├── style.css       # All visual styling
-└── app.js          # State management and DOM interactions
+├── index.html          # Page structure and DOM skeleton
+├── css/
+│   └── style.css       # All visual styling
+└── src/
+    ├── app.js          # Event wiring and DOM references
+    ├── addTodo.js      # Creates and appends todo items
+    ├── toggleTodo.js   # Toggles completed state
+    └── deleteTodo.js   # Removes todo items
 ```
 
 ---
@@ -25,7 +30,7 @@ Single-page, in-browser TODO application. No build tools, no frameworks, no exte
 
 Responsibilities:
 - Defines the page skeleton (head, body, meta)
-- Links `style.css` and `app.js`
+- Links `css/style.css` and `src/app.js`
 - Contains the static layout: header, input row, todo list container, empty-state message
 
 Key elements:
