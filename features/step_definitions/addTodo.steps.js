@@ -24,6 +24,7 @@ When('I press the Enter key', async function () {
 Then('a TODO with the title {string} appears in the list', async function (expectedTitle) {
   await this.page.waitForFunction(
     (title) => [...document.querySelectorAll('#todo-list li span')].some(s => s.textContent === title),
-    expectedTitle
+    expectedTitle,
+    { timeout: 2000 }
   );
 });

@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const projectRoot = resolve(__dirname, '../../');
 
-setDefaultTimeout(15_000);
+setDefaultTimeout(3_000);
 
 const MIME = {
   '.html': 'text/html',
