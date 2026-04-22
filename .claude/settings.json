@@ -10,9 +10,7 @@
       "Edit(./.claude/settings.json)",
       "Write(./.claude/settings.json)"
     ]
-  }, "allow": [
-    "Read(./.**)"
-  ],
+  },
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
