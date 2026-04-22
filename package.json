@@ -2,11 +2,14 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:bdd": "cucumber-js"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^11",
     "@vitest/coverage-v8": "^2.0.0",
     "jsdom": "^29.0.2",
+    "playwright": "^1",
     "vitest": "^2.0.0"
   }
 }
