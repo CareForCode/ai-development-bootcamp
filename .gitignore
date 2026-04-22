@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Test coverage output
+coverage/
+
+# IntelliJ IDEA
+.idea/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
