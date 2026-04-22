@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.0.0",
+    "jsdom": "^29.0.2",
+    "vitest": "^2.0.0"
+  }
+}
