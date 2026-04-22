@@ -36,7 +36,7 @@ function startServer() {
 Before(async function () {
   this.server = await startServer();
   this.baseUrl = `http://127.0.0.1:${this.server.address().port}`;
-  this.browser = await chromium.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] });
+  this.browser = await chromium.launch();
   this.page = await this.browser.newPage();
 });
 

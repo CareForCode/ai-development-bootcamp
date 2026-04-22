@@ -6,19 +6,15 @@ Given('I am on the TODO main page', async function () {
 });
 
 When('I click on the text field', async function () {
-  await this.page.evaluate(() => document.querySelector('#todo-input').focus());
+  await this.page.click('#todo-input');
 });
 
 When('I type {string}', async function (text) {
-  await this.page.evaluate((t) => { document.querySelector('#todo-input').value = t; }, text);
+  await this.page.fill('#todo-input', text);
 });
 
 When('I press the Enter key', async function () {
-  await this.page.evaluate(() => {
-    document.querySelector('#todo-input').dispatchEvent(
-      new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
-    );
-  });
+  await this.page.press('#todo-input', 'Enter');
 });
 
 Then('a TODO with the title {string} appears in the list', async function (expectedTitle) {
