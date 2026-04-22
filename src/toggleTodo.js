@@ -1,4 +1,3 @@
-// Toggles the completed state of a TODO item
-export function toggleTodo(li, checked) {
-  li.classList.toggle('completed', checked);
+export function toggleTodo(todos, id) {
+  return todos.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
 }

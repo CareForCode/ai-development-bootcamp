@@ -2,27 +2,60 @@ import { addTodo } from './addTodo.js';
 import { toggleTodo } from './toggleTodo.js';
 import { deleteTodo } from './deleteTodo.js';
 
-// Shared DOM references
+let todos = [];
+
 const input = document.getElementById('todo-input');
 const addBtn = document.getElementById('add-btn');
 const list = document.getElementById('todo-list');
+const emptyState = document.getElementById('empty-state');
 
-// Allow adding a todo via the Add button or the Enter key
-addBtn.addEventListener('click', () => addTodo(input, list));
+function render() {
+  list.innerHTML = '';
+  todos.forEach(todo => {
+    const li = document.createElement('li');
+    li.dataset.id = todo.id;
+    if (todo.completed) li.classList.add('completed');
 
-input.addEventListener('keydown', e => {
-  if (e.key === 'Enter') addTodo(input, list);
-});
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = todo.completed;
 
-// Event delegation: handle toggle and delete for all list items from the parent
+    const span = document.createElement('span');
+    span.textContent = todo.title;
+
+    const btn = document.createElement('button');
+    btn.className = 'delete-btn';
+    btn.textContent = '✕';
+
+    li.append(checkbox, span, btn);
+    list.appendChild(li);
+  });
+  emptyState.classList.toggle('hidden', todos.length > 0);
+}
+
+function handleAdd() {
+  const title = input.value.trim();
+  if (!title) return;
+  todos.push(addTodo(title));
+  input.value = '';
+  render();
+}
+
+addBtn.addEventListener('click', handleAdd);
+input.addEventListener('keydown', e => { if (e.key === 'Enter') handleAdd(); });
+
 list.addEventListener('change', e => {
   if (e.target.matches('input[type="checkbox"]')) {
-    toggleTodo(e.target.closest('li'), e.target.checked);
+    todos = toggleTodo(todos, e.target.closest('li').dataset.id);
+    render();
   }
 });
 
 list.addEventListener('click', e => {
   if (e.target.matches('.delete-btn')) {
-    deleteTodo(e.target.closest('li'));
+    todos = deleteTodo(todos, e.target.closest('li').dataset.id);
+    render();
   }
 });
+
+render();
