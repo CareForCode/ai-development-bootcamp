@@ -17,6 +17,10 @@ When('I press the Enter key', async function () {
   await this.page.press('#todo-input', 'Enter');
 });
 
+When('I click the Add button', async function () {
+  await this.page.click('#add-btn');
+});
+
 Then('a TODO with the title {string} appears in the list', async function (expectedTitle) {
   await this.page.waitForFunction(
     (title) => [...document.querySelectorAll('#todo-list li span')].some(s => s.textContent === title),
