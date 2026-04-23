@@ -1,5 +1,8 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(.claude/statusline.sh)"
+    ],
     "deny": [
       "Read(../dschtest/)",
       "Write(//**/.env)"
@@ -25,6 +28,6 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "/.claude/statusline.sh"
+    "command": ".claude/statusline.sh"
   }
 }
