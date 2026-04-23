@@ -1,3 +1,4 @@
 export function deleteTodo(todos, id) {
-  return todos.filter(t => t.id !== id);
+  const index = todos.findIndex(t => t.id === id);
+  if (index !== -1) todos.splice(index, 1);
 }

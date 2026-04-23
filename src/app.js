@@ -34,9 +34,7 @@ function render() {
 }
 
 function handleAdd() {
-  const title = input.value.trim();
-  if (!title) return;
-  todos.push(addTodo(title));
+  addTodo(todos, input.value);
   input.value = '';
   render();
 }
@@ -46,14 +44,14 @@ input.addEventListener('keydown', e => { if (e.key === 'Enter') handleAdd(); });
 
 list.addEventListener('change', e => {
   if (e.target.matches('input[type="checkbox"]')) {
-    todos = toggleTodo(todos, e.target.closest('li').dataset.id);
+    toggleTodo(todos, e.target.closest('li').dataset.id);
     render();
   }
 });
 
 list.addEventListener('click', e => {
   if (e.target.matches('.delete-btn')) {
-    todos = deleteTodo(todos, e.target.closest('li').dataset.id);
+    deleteTodo(todos, e.target.closest('li').dataset.id);
     render();
   }
 });
