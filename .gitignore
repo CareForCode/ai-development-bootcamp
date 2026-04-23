@@ -10,3 +10,4 @@ coverage/
 # OS artifacts
 .DS_Store
 Thumbs.db
+/.playwright-mcp/
