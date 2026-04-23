@@ -20,7 +20,7 @@
 
     "network": {
       "allowManagedDomainsOnly": true,
-      "allowedDomains": ["github.com"]
+      "allowedDomains": ["github.com", "localhost"]
     }
   },
   "statusLine": {

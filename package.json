@@ -3,7 +3,7 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:bdd": "cucumber-js"
+    "test:bdd": "PLAYWRIGHT_BROWSERS_PATH=.playwright-mcp cucumber-js"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^11",
