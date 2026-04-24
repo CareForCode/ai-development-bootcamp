@@ -7,3 +7,9 @@ Feature: Toggle TODO
     Given a TODO with the title "Buy milk" exists in the list
     When I click the checkbox for "Buy milk"
     Then the TODO "Buy milk" appears with strikethrough
+
+  Scenario: Unchecking a TODO removes the strikethrough
+    Given a TODO with the title "Buy milk" exists in the list
+    When I click the checkbox for "Buy milk"
+    And I click the checkbox for "Buy milk"
+    Then the TODO "Buy milk" does not appear with strikethrough

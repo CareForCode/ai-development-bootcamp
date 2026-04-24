@@ -16,3 +16,12 @@ Then('the TODO {string} appears with strikethrough', async function (title) {
     .locator('span')
     .waitFor({ state: 'visible', timeout: 2000 });
 });
+
+Then('the TODO {string} does not appear with strikethrough', async function (title) {
+  await this.page
+    .locator('#todo-list li')
+    .filter({ hasText: title })
+    .and(this.page.locator(':not(.completed)'))
+    .locator('span')
+    .waitFor({ state: 'visible', timeout: 2000 });
+});

@@ -26,4 +26,23 @@ describe('addTodo', () => {
     addTodo(todos, '   ')
     expect(todos).toHaveLength(0)
   })
+
+  it('does not add a todo for an empty string title', () => {
+    const todos = []
+    addTodo(todos, '')
+    expect(todos).toHaveLength(0)
+  })
+
+  it('stores the trimmed title', () => {
+    const todos = []
+    addTodo(todos, '  Buy milk  ')
+    expect(todos[0].title).toBe('Buy milk')
+  })
+
+  it('generates unique ids for multiple todos', () => {
+    const todos = []
+    addTodo(todos, 'Task 1')
+    addTodo(todos, 'Task 2')
+    expect(todos[0].id).not.toBe(todos[1].id)
+  })
 })

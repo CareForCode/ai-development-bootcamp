@@ -18,6 +18,13 @@ describe('toggleTodo', () => {
     expect(todos[0].completed).toBe(false)
   })
 
+  it('does nothing when the id does not exist', () => {
+    const todos = []
+    addTodo(todos, 'Task')
+    toggleTodo(todos, 'nonexistent-id')
+    expect(todos[0].completed).toBe(false)
+  })
+
   it('does not modify other todos', () => {
     const todos = []
     addTodo(todos, 'Task 1')

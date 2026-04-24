@@ -7,4 +7,4 @@ Feature: Add TODO Validation
     When I click on the text field
     And I type "   "
     And I press the Enter key
-    Then the TODO list has 0 items
+    Then 0 TODOs appear in the list

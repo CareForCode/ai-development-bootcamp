@@ -10,6 +10,13 @@ describe('deleteTodo', () => {
     expect(todos).toHaveLength(0)
   })
 
+  it('does nothing when the id does not exist', () => {
+    const todos = []
+    addTodo(todos, 'Task')
+    deleteTodo(todos, 'nonexistent-id')
+    expect(todos).toHaveLength(1)
+  })
+
   it('keeps todos with other ids', () => {
     const todos = []
     addTodo(todos, 'Task 1')
