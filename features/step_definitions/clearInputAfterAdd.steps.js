@@ -1,6 +1,7 @@
 import { Then } from '@cucumber/cucumber';
+import assert from 'assert';
 
 Then('the text field is empty', async function () {
   const value = await this.page.locator('#todo-input').inputValue();
-  if (value !== '') throw new Error(`Expected empty input but got "${value}"`);
+  assert.strictEqual(value, '', `Expected empty input but got "${value}"`);
 });
