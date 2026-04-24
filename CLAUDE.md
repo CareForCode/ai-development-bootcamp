@@ -74,11 +74,12 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 
 **Tech constraints:** Plain HTML/CSS/JS only — no frameworks, no build tools, no external dependencies.
 
-**Hard scope boundaries (non-goals):** No user auth, no backend, no cloud sync, no persistence, no native apps, no due dates/priorities/tags.
+**Hard scope boundaries (non-goals):** No user auth, no backend, no cloud sync, no persistence, no native apps, no priorities/tags.
 
 **Data model (in-memory only):**
 - `id` — string (unique identifier)
 - `title` — string (task text)
 - `completed` — boolean
+- `dueDate` — string | null (ISO 8601 date, optional)
 
-**Core features:** view list · add todo · toggle complete · delete todo
+**Core features:** view list · add todo · toggle complete · delete todo · due date

@@ -5,6 +5,7 @@ import { deleteTodo } from './deleteTodo.js';
 let todos = [];
 
 const input = document.getElementById('todo-input');
+const dueDateInput = document.getElementById('due-date-input');
 const addBtn = document.getElementById('add-btn');
 const list = document.getElementById('todo-list');
 const emptyState = document.getElementById('empty-state');
@@ -27,15 +28,26 @@ function render() {
     btn.className = 'delete-btn';
     btn.textContent = '✕';
 
-    li.append(checkbox, span, btn);
+    li.append(checkbox, span);
+
+    if (todo.dueDate) {
+      const due = document.createElement('span');
+      due.className = 'due-date';
+      due.dataset.dueDate = todo.dueDate;
+      due.textContent = todo.dueDate;
+      li.appendChild(due);
+    }
+
+    li.appendChild(btn);
     list.appendChild(li);
   });
   emptyState.classList.toggle('hidden', todos.length > 0);
 }
 
 function handleAdd() {
-  addTodo(todos, input.value);
+  addTodo(todos, input.value, dueDateInput.value);
   input.value = '';
+  dueDateInput.value = '';
   render();
 }
 

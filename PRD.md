@@ -75,6 +75,14 @@ Anyone who needs a quick, no-setup task list in their browser — students, prof
 - Clicking the delete button removes the TODO from the list immediately
 - No confirmation dialog is required for MVP
 
+### 6.5 Due Date
+
+- Each TODO may optionally have a due date
+- A date input is shown alongside the title input when adding a new TODO
+- If a due date is set, it is displayed on the TODO item (e.g. "Due: Apr 28")
+- If no due date is set, nothing is shown in its place
+- Due dates are for display only — no sorting, filtering, or reminders
+
 ---
 
 ## 7. User Interface
@@ -82,15 +90,15 @@ Anyone who needs a quick, no-setup task list in their browser — students, prof
 ### Layout (single page)
 
 ```
-┌────────────────────────────────────┐
-│           📝 TODO App              │
-├──────────────────────────┬─────────┤
-│  [ What needs to be done? ]  [Add] │
-├────────────────────────────────────┤
-│  ☐  Buy groceries              [✕] │
-│  ☑  Send project report        [✕] │
-│  ☐  Call the dentist           [✕] │
-└────────────────────────────────────┘
+┌────────────────────────────────────────────────┐
+│                 📝 TODO App                    │
+├────────────────────────────────────────────────┤
+│  [ What needs to be done? ]  [Due date]  [Add] │
+├────────────────────────────────────────────────┤
+│  ☐  Buy groceries           Due: Apr 28    [✕] │
+│  ☑  Send project report                    [✕] │
+│  ☐  Call the dentist        Due: Apr 30    [✕] │
+└────────────────────────────────────────────────┘
 ```
 
 ### UI Rules
@@ -107,9 +115,10 @@ Each TODO item has the following structure (in-memory only):
 
 | Field       | Type    | Description                          |
 |-------------|---------|--------------------------------------|
-| `id`        | string  | Unique identifier (e.g. UUID or timestamp) |
-| `title`     | string  | The task description entered by the user |
-| `completed` | boolean | Whether the task has been checked off |
+| `id`        | string          | Unique identifier (e.g. UUID or timestamp) |
+| `title`     | string          | The task description entered by the user |
+| `completed` | boolean         | Whether the task has been checked off |
+| `dueDate`   | string \| null  | Optional due date in ISO 8601 format (e.g. `"2026-04-28"`); `null` if not set |
 
 ---
 
@@ -128,5 +137,5 @@ Each TODO item has the following structure (in-memory only):
 - Persisting TODOs via `localStorage` or a backend API
 - Filtering by status (All / Active / Completed)
 - Reordering TODOs via drag-and-drop
-- Due dates, priorities, and tags
+- Priorities and tags
 - Multi-user support or cloud sync

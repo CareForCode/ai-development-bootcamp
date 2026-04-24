@@ -45,4 +45,22 @@ describe('addTodo', () => {
     addTodo(todos, 'Task 2')
     expect(todos[0].id).not.toBe(todos[1].id)
   })
+
+  it('stores a valid ISO date when dueDate is provided', () => {
+    const todos = []
+    addTodo(todos, 'Buy milk', '2026-05-01')
+    expect(todos[0].dueDate).toBe('2026-05-01')
+  })
+
+  it('sets dueDate to null when not provided', () => {
+    const todos = []
+    addTodo(todos, 'Buy milk')
+    expect(todos[0].dueDate).toBeNull()
+  })
+
+  it('sets dueDate to null when empty string is passed', () => {
+    const todos = []
+    addTodo(todos, 'Buy milk', '')
+    expect(todos[0].dueDate).toBeNull()
+  })
 })

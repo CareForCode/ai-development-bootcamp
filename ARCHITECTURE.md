@@ -71,7 +71,7 @@ let todos = [];
 { id: string, title: string, completed: boolean }
 ```
 
-`id` is generated via `Date.now().toString()`.
+`id` is generated via `crypto.randomUUID()`.
 
 ### Functions
 
