@@ -31,6 +31,14 @@ Then('the empty state is not visible', async function () {
   await this.page.locator('#empty-state').waitFor({ state: 'hidden', timeout: 2000 });
 });
 
+Then('{string} appears as the first TODO in the list', async function (title) {
+  await this.page
+    .locator('#todo-list li')
+    .first()
+    .locator('span', { hasText: title })
+    .waitFor({ state: 'visible', timeout: 2000 });
+});
+
 Then('{string} appears as the last TODO in the list', async function (title) {
   await this.page
     .locator('#todo-list li')

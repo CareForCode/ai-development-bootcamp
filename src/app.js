@@ -1,8 +1,9 @@
 import { addTodo } from './addTodo.js';
 import { toggleTodo } from './toggleTodo.js';
 import { deleteTodo } from './deleteTodo.js';
+import { save, load } from './storage.js';
 
-let todos = [];
+let todos = load();
 
 const input = document.getElementById('todo-input');
 const dueDateInput = document.getElementById('due-date-input');
@@ -48,6 +49,7 @@ function handleAdd() {
   addTodo(todos, input.value, dueDateInput.value);
   input.value = '';
   dueDateInput.value = '';
+  save(todos);
   render();
 }
 
@@ -57,6 +59,7 @@ input.addEventListener('keydown', e => { if (e.key === 'Enter') handleAdd(); });
 list.addEventListener('change', e => {
   if (e.target.matches('input[type="checkbox"]')) {
     toggleTodo(todos, e.target.closest('li').dataset.id);
+    save(todos);
     render();
   }
 });
@@ -64,6 +67,7 @@ list.addEventListener('change', e => {
 list.addEventListener('click', e => {
   if (e.target.matches('.delete-btn')) {
     deleteTodo(todos, e.target.closest('li').dataset.id);
+    save(todos);
     render();
   }
 });

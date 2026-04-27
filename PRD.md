@@ -41,7 +41,7 @@ Anyone who needs a quick, no-setup task list in their browser — students, prof
 | Attribute | Details |
 |-----------|---------|
 | Platform  | Web (browser) |
-| Storage   | None (in-memory only; data does not persist across page reloads) |
+| Storage   | localStorage (data persists across page reloads; cleared when browser storage is cleared) |
 | Auth      | None |
 
 ---
@@ -128,13 +128,12 @@ Each TODO item has the following structure (in-memory only):
 |--------|--------|
 | Core actions work without errors | Add, check, uncheck, delete all function correctly |
 | Empty state handled | Shown when no TODOs are present |
-| No persistence required | Data lives only for the current session |
+| Persistence | TODOs (including completed state and due date) survive page reload via localStorage |
 
 ---
 
 ## 10. Future Considerations (Out of Scope for v1)
 
-- Persisting TODOs via `localStorage` or a backend API
 - Filtering by status (All / Active / Completed)
 - Reordering TODOs via drag-and-drop
 - Priorities and tags

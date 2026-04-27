@@ -6,7 +6,7 @@
 
 ## Overview
 
-Single-page, in-browser TODO application. No build tools, no frameworks, no external dependencies. Three files, plain web standards.
+Single-page, in-browser TODO application. No build tools, no frameworks, no external dependencies. Plain web standards. TODOs are persisted via `localStorage`.
 
 ---
 
@@ -21,7 +21,8 @@ Single-page, in-browser TODO application. No build tools, no frameworks, no exte
     ├── app.js          # Event wiring and DOM references
     ├── addTodo.js      # Creates and appends todo items
     ├── toggleTodo.js   # Toggles completed state
-    └── deleteTodo.js   # Removes todo items
+    ├── deleteTodo.js   # Removes todo items
+    └── storage.js      # localStorage persistence (save/load)
 ```
 
 ---
@@ -54,21 +55,34 @@ No external fonts or icon libraries. Delete button uses a plain `✕` character.
 
 ---
 
+## storage.js
+
+Responsibilities:
+- Encapsulates all `localStorage` access under a single key (`'todos'`)
+- Keeps persistence details out of `app.js`
+
+| Export | Description |
+|---|---|
+| `save(todos)` | Serializes `todos` array to JSON and writes to `localStorage` |
+| `load()` | Reads and deserializes from `localStorage`; returns `[]` if nothing stored |
+
+---
+
 ## app.js
 
 Responsibilities:
-- Maintains in-memory `todos` array (no persistence)
-- Renders the full list to the DOM on every state change
-- Handles all user events (add, toggle, delete)
+- Loads initial state from `storage.js` on startup
+- Maintains the `todos` array and renders the full list on every state change
+- Handles all user events (add, toggle, delete) and persists after each mutation
 
 ### Data model
 
 ```js
-// In-memory array — reset on page reload
-let todos = [];
+// Persisted to localStorage under key 'todos'
+let todos = load();
 
 // Each item:
-{ id: string, title: string, completed: boolean }
+{ id: string, title: string, completed: boolean, dueDate: string | null }
 ```
 
 `id` is generated via `crypto.randomUUID()`.
@@ -77,9 +91,9 @@ let todos = [];
 
 | Function | Description |
 |---|---|
-| `addTodo(title)` | Appends a new item to `todos`, re-renders |
-| `toggleTodo(id)` | Flips `completed` on the matching item, re-renders |
-| `deleteTodo(id)` | Removes item by `id`, re-renders |
+| `addTodo(title)` | Appends a new item to `todos`, saves, re-renders |
+| `toggleTodo(id)` | Flips `completed` on the matching item, saves, re-renders |
+| `deleteTodo(id)` | Removes item by `id`, saves, re-renders |
 | `render()` | Clears and rebuilds `#todo-list` from `todos`; toggles empty-state |
 
 ### Event wiring (set up on `DOMContentLoaded`)
@@ -95,6 +109,14 @@ Input is trimmed before use; empty/whitespace submissions are ignored.
 ## Data Flow
 
 ```
+Page load
+    │
+    ▼
+load() — read todos[] from localStorage
+    │
+    ▼
+render() — initial UI
+
 User action
     │
     ▼
@@ -102,6 +124,8 @@ Event handler (app.js)
     │
     ▼
 Mutate todos[]
+    │
+    ├──▶ save() — write todos[] to localStorage
     │
     ▼
 render() — rebuild DOM from todos[]
@@ -116,6 +140,5 @@ No two-way binding, no virtual DOM — every state change triggers a full list r
 
 ## Constraints (from PRD)
 
-- No persistence — `todos` lives only for the current page session
 - No auth, no backend, no routing
 - Plain HTML/CSS/JS only — no npm, no bundler, no framework
