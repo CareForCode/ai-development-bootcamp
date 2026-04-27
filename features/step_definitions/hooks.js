@@ -1,4 +1,4 @@
-import { Before, After, setDefaultTimeout } from '@cucumber/cucumber';
+import { Before, After, BeforeAll, AfterAll, setDefaultTimeout } from '@cucumber/cucumber';
 import { chromium } from 'playwright';
 import { createServer } from 'http';
 import { readFileSync } from 'fs';
@@ -33,14 +33,24 @@ function startServer() {
   });
 }
 
+let server;
+let baseUrl;
+
+BeforeAll(async function () {
+  server = await startServer();
+  baseUrl = `http://127.0.0.1:${server.address().port}`;
+});
+
+AfterAll(async function () {
+  await new Promise((res) => server?.close(res));
+});
+
 Before(async function () {
-  this.server = await startServer();
-  this.baseUrl = `http://127.0.0.1:${this.server.address().port}`;
+  this.baseUrl = baseUrl;
   this.browser = await chromium.launch();
   this.page = await this.browser.newPage();
 });
 
 After(async function () {
   await this.browser?.close();
-  await new Promise((res) => this.server?.close(res));
 });
