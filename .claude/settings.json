@@ -17,7 +17,6 @@
 
     "filesystem": {
       "denyRead": ["~/", "../dschtest/"],
-      "allowRead": ["."],
       "denyWrite": ["//**/.env", "//**/.env.*",".claude/settings.json"]
     },
 
