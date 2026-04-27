@@ -35,3 +35,8 @@ When('I toggle the todo {string}', async function (title) {
     .locator('input[type="checkbox"]')
     .click();
 });
+
+When('I reload the page', async function () {
+  await this.page.reload();
+  await this.page.waitForSelector('#todo-input');
+});
