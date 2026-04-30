@@ -1,3 +1,4 @@
+@api
 Feature: TODO REST API
 
   Scenario: Todo erstellen

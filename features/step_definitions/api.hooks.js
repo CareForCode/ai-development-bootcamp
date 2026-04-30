@@ -1,4 +1,4 @@
-import { BeforeAll, AfterAll } from '@cucumber/cucumber';
+import { BeforeAll, AfterAll, Before } from '@cucumber/cucumber';
 import { spawn } from 'child_process';
 import { resolve } from 'path';
 import { fileURLToPath } from 'url';
@@ -12,6 +12,7 @@ BeforeAll({ timeout: 120_000 }, async function () {
   backendProcess = spawn('./mvnw', ['spring-boot:run'], {
     cwd: backendDir,
     stdio: 'inherit',
+    env: { ...process.env, SPRING_PROFILES_ACTIVE: 'test' },
   });
 
   const deadline = Date.now() + 90_000;
@@ -28,4 +29,8 @@ BeforeAll({ timeout: 120_000 }, async function () {
 
 AfterAll(async function () {
   backendProcess?.kill();
+});
+
+Before({ tags: '@api' }, async function () {
+  await fetch('http://localhost:8080/api/todos/reset', { method: 'DELETE' });
 });

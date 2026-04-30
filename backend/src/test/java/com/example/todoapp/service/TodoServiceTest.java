@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +26,26 @@ class TodoServiceTest {
 
     @InjectMocks
     TodoService todoService;
+
+    @Test
+    void getAll_returnsAllTodosAsDTOs() {
+        UUID id1 = UUID.randomUUID();
+        UUID id2 = UUID.randomUUID();
+        when(repository.findAll()).thenReturn(List.of(
+                new Todo(id1, "Buy milk", false),
+                new Todo(id2, "Walk the dog", true)
+        ));
+
+        List<TodoDTO> result = todoService.getAll();
+
+        assertEquals(2, result.size());
+        assertEquals(id1, result.get(0).id());
+        assertEquals("Buy milk", result.get(0).title());
+        assertFalse(result.get(0).completed());
+        assertEquals(id2, result.get(1).id());
+        assertEquals("Walk the dog", result.get(1).title());
+        assertTrue(result.get(1).completed());
+    }
 
     @Test
     void create_savesAndReturnsTodo() {

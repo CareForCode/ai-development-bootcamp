@@ -18,7 +18,9 @@ public class TodoService {
     }
 
     public List<TodoDTO> getAll() {
-        return null;
+        return repository.findAll().stream()
+                .map(todo -> new TodoDTO(todo.getId(), todo.getTitle(), todo.isCompleted()))
+                .toList();
     }
 
     public TodoDTO create(String title) {
