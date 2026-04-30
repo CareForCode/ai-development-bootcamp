@@ -18,8 +18,7 @@ public class TodoService {
 
     public TodoDTO create(String title) {
         Todo todo = new Todo(UUID.randomUUID(), title);
-        Todo saved = todo;
-        //Todo saved = repository.save(todo);
-        return new TodoDTO(saved.getId(), "", saved.isCompleted());
+        Todo saved = repository.save(todo);
+        return new TodoDTO(saved.getId(), saved.getTitle(), saved.isCompleted());
     }
 }
