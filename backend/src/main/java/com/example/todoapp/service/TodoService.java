@@ -5,6 +5,7 @@ import com.example.todoapp.entity.Todo;
 import com.example.todoapp.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -14,6 +15,10 @@ public class TodoService {
 
     public TodoService(TodoRepository repository) {
         this.repository = repository;
+    }
+
+    public List<TodoDTO> getAll() {
+        return null;
     }
 
     public TodoDTO create(String title) {
