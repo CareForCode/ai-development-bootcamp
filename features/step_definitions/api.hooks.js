@@ -14,7 +14,7 @@ BeforeAll({ timeout: 120_000 }, async function () {
     stdio: 'inherit', // connects child process's stdin/stdout/stderr to parent, so that child's output appears in terminal
     env: {
       ...process.env, // passes environment variables to child process
-      SPRING_PROFILES_ACTIVE: 'test' // loads application.properties from /test instead of /src
+      SPRING_PROFILES_ACTIVE: 'test' // activates test profile. Among other things, loads application-test.properties (if it exists) instead of application.properties.
     },
   });
 
