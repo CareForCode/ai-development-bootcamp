@@ -11,8 +11,11 @@ let backendProcess;
 BeforeAll({ timeout: 120_000 }, async function () {
   backendProcess = spawn('./mvnw', ['spring-boot:run'], {
     cwd: backendDir,
-    stdio: 'inherit',
-    env: { ...process.env, SPRING_PROFILES_ACTIVE: 'test' },
+    stdio: 'inherit', // connects child process's stdin/stdout/stderr to parent, so that child's output appears in terminal
+    env: {
+      ...process.env, // passes environment variables to child process
+      SPRING_PROFILES_ACTIVE: 'test' // loads application.properties from /test instead of /src
+    },
   });
 
   const deadline = Date.now() + 90_000;
