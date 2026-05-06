@@ -65,7 +65,7 @@ class TodoControllerTest {
         boolean anyCompletedState = true;
         when(todoUseCase.toggle(id)).thenReturn(new Todo(id, "Buy milk", anyCompletedState));
 
-        mockMvc.perform(patch("/api/todos/{id}/toggle", id))
+        mockMvc.perform(patch("/api/todos/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id.toString()))
                 .andExpect(jsonPath("$.title").value("Buy milk"))
@@ -77,7 +77,7 @@ class TodoControllerTest {
         UUID id = UUID.randomUUID();
         when(todoUseCase.toggle(id)).thenThrow(new NoSuchElementException("Todo not found"));
 
-        mockMvc.perform(patch("/api/todos/{id}/toggle", id))
+        mockMvc.perform(patch("/api/todos/{id}", id))
                 .andExpect(status().isNotFound());
     }
 }

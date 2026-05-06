@@ -39,7 +39,7 @@ public class TodoController {
         return toResponse(todoUseCase.create(request.title()));
     }
 
-    @PatchMapping("/{id}/toggle")
+    @PatchMapping("/{id}")
     public TodoResponse toggle(@PathVariable UUID id) {
         return toResponse(todoUseCase.toggle(id));
     }
