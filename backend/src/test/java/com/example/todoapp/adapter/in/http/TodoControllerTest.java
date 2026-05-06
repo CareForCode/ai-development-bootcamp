@@ -46,8 +46,8 @@ class TodoControllerTest {
 
     @Test
     void postTodo_returns201WithTitleAndCompleted() throws Exception {
-        when(todoUseCase.create("Buy milk"))
-                .thenReturn(new Todo(null, "Buy milk", false));
+        when(todoUseCase.create("Buy milk", null))
+                .thenReturn(new Todo(null, "Buy milk", false, null));
 
         mockMvc.perform(post("/api/todos")
                         .contentType(MediaType.APPLICATION_JSON)
